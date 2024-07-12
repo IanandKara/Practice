@@ -1,10 +1,15 @@
 #include "opencv2/opencv.hpp"
+#include <csignal>
 
-bool WebcamCapture(unsigned char webcamNumber = 0) {
+#include "global.hpp"
+#include "inc/webcam.hpp"
+
+void WebcamCapture(unsigned char webcamNumber ) {
+
     cv::VideoCapture vcap(webcamNumber); 
-      if(!vcap.isOpened()){
-             return true;
-      }
+      if(!vcap.isOpened())
+             return;
+      
 
    int frame_width = vcap.get(cv::CAP_PROP_FRAME_WIDTH);
    int frame_height = vcap.get(cv::CAP_PROP_FRAME_HEIGHT);
@@ -20,5 +25,17 @@ bool WebcamCapture(unsigned char webcamNumber = 0) {
        
        //tread::sleep make it worse 
     }
-    return false;
+    return ;
+}
+
+void WebcamPick(unsigned char webcamNumber ) {
+
+	cv::VideoCapture vcap(webcamNumber);
+	if (!vcap.isOpened())
+		return;
+
+	cv::Mat frame;
+	vcap >> frame;
+	cv::imshow("frame", frame);
+	cv::imwrite("peek.png", frame);
 }
