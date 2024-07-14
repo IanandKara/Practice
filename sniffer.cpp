@@ -136,6 +136,7 @@ int main()
 		return 1;
 	}
 
+    // Проверка ошибки получения хоста 
 	localHost = gethostbyname(hostname);
 	if(localHost == NULL) {
         std::cerr << "Error: " << WSAGetLastError() << '\n';
