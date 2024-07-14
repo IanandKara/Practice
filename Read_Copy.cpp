@@ -5,7 +5,7 @@
 namespace fs = std::filesystem;
 
 // Получение путей текстовых файлов, записывает всё в вектор
-std::vector<fs::path> Find_TXT(const fs::path& Directory) 
+std::vector<fs::path> Find_files(const fs::path& Directory) 
 {
     std::vector<fs::path> TXT_files;
 
@@ -61,7 +61,7 @@ int main()
 {
     // Вызов 
     fs::path Directory = "C:\\"; // Установка директории для поиска
-    std::vector<fs::path> TXT_files = Find_TXT(Directory);
+    std::vector<fs::path> TXT_files = Find_files(Directory);
 
     // По части передачи данных не уверен максимально. По идее можно просто создать сетевую папку на приемщике и вписать её путь
     
