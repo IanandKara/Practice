@@ -111,33 +111,34 @@ int main()
 
 	logfile = fopen("log.txt", "w");
 	if(logfile == NULL) {
-		printf("Error: Unable to create file.");
+        std::cerr << "Error: Unable to create file.\n";
+        return 1;
 	}
 
 	// Инициализируем winsock
 	if(WSAStartup(MAKEWORD(2,2), &wsaData) != 0) {
-		printf("Error: WSAStartup() failed.\n");
+        std::cerr << "Error: WSAStartup() failed.\n";
         WSACleanup();
 		return 1;
 	}
 
 	// Создаем сырой сокет
 	if((sock = socket(AF_INET, SOCK_RAW, IPPROTO_IP)) == INVALID_SOCKET) {
-		printf("Error: Failed to create a raw socket.\n");
+        std::cerr << "Error: Failed to create a raw socket.\n";
         WSACleanup();
 		return 1;
 	}
 
 	// Получаем имя пользователя
 	if(gethostname(hostname, sizeof(hostname)) == SOCKET_ERROR) {
-		printf("Error: %d",WSAGetLastError());
+        std::cerr << "Error: " << WSAGetLastError() << '\n';
         WSACleanup();
 		return 1;
 	}
 
 	localHost = gethostbyname(hostname);
 	if(localHost == NULL) {
-		printf("Error: %d.\n",WSAGetLastError());
+        std::cerr << "Error: " << WSAGetLastError() << '\n';
         WSACleanup();
 		return 1;
 	}
